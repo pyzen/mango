@@ -50,7 +50,7 @@ class SessionStore(SessionBase):
             }
         try:
             if must_create:
-                db.sessions.save(obj, safe=True)
+                db.sessions.save(obj, safe=True, capped=True, size=10000000)
             else:
                 db.sessions.update({'session_key': self.session_key},
                                    obj, upsert=True)
